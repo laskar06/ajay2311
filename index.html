@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Education AI</title>
+    <script>
+        async function submitQuery() {
+            const input = document.getElementById("userInput").value;
+            const responseElement = document.getElementById("response");
+
+            const res = await fetch('http://localhost:5000/api/personalized-learning', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userInput: input }),
+            });
+
+            const data = await res.json();
+            responseElement.innerText = "AI Response: " + data.message;
+        }
+    </script>
+</head>
+<body>
+    <h1>Personalized Education AI</h1>
+    <input type="text" id="userInput" placeholder="Enter your question or topic">
+    <button onclick="submitQuery()">Submit</button>
+    <p id="response"></p>
+</body>
+</html>
